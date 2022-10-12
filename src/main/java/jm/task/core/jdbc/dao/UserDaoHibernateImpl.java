@@ -5,8 +5,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import jm.task.core.jdbc.util.Util;
 import org.hibernate.Transaction;
+import org.hibernate.query.criteria.internal.CriteriaDeleteImpl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -73,12 +75,10 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<>();
+        List<User> users = Collections.emptyList();
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            for(Object o : session.createQuery("FROM User").getResultList()){
-                users.add((User) o);
-            }
+            users = session.createQuery("select u from User u", User.class).getResultList();
             session.getTransaction().commit();
             return users;
         } catch (Exception e) {
