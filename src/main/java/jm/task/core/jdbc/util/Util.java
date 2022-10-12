@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class Util {
-    // реализуйте настройку соеденения с БД
     public static final String URL = "jdbc:mysql://localhost:3306/kata_db";
     public static final String USERNAME = "root";
     public static final String PASSWORD = "root";
@@ -34,7 +33,6 @@ public class Util {
             try {
                 Configuration configuration = new Configuration();
 
-                // Hibernate settings equivalent to hibernate.cfg.xml's properties
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
                 settings.put(Environment.URL, "jdbc:mysql://localhost:3306/kata_db");
